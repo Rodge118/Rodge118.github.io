@@ -1,0 +1,79 @@
+body {
+    background-color: #222;
+    color: #eee;
+    font-family: monospace;
+    padding: 0 10px 10px 10px;
+    margin: 0 10px 10px 10px;
+    
+}
+
+#game {
+    max-width: 600px;
+    margin: 0 auto;
+}
+button {
+    display: block;
+    background: #444;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #666;
+}
+
+#navbar {
+    display: flex; /* children in a row */
+    justify-content: flex-start; /* align left */
+    gap: 10px;
+    padding: 10px 20px 10px 20px;
+    background-color: #333;
+    position: static;
+    top: 0;
+    z-index: 1000;
+    border-radius: 0 0 12px 12px;
+}
+
+#navbar button {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+#navbar button:hover {
+    background-color: #666
+}
+
+/* Everything after this point is for Copilot's demo */
+#hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#viewport {
+    background: #111;
+    border: 1px solid #333;
+    padding: 12px;
+    min-height: 60px;
+    margin-bottom: 10px;
+}
+
+#log {
+    margin-top: 12px;
+    max-height: 180px;
+    overflow-y: auto;
+    border-top: 1px solid #333;
+    padding-top: 8px;
+    font-size: 0.9em;
+    color: #ddd;
+}
+
+#choices button { display: inline-block; margin-right: 8px; }
