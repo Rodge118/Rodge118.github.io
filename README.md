@@ -1,7 +1,7 @@
 Minimal RPG demo
 =================
 This game so far is a small demo created entirely by copilot. What follows is all it. I'll make a more complicated game once I learn more about how to make web games.
-=================
+
 
 This repository contains a tiny browser RPG demo to help test your static site and GitHub Pages setup.
 

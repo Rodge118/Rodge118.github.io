@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Rodge118's Site</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <nav id="navbar">
+    <div class="HomeButton"><a href="index.html" style="color: orangered">R118</a></div>
+    <a href="index.html"><button>Home</button></a>
+    <!--<a href="demo.html"><button>Play Demo</button></a>-->
+    <a href="about.html"><button>About</button></a>
+    <!--<a href="test.html"><button>Testing page</button></a>-->
+    <a href="tictactoe.html"><button>Tic Tac Toe</button></a>
+  </nav>
+
+  <body>
+    <h1>CUSTOMIZABLE TIC TAC TOE</h1>
+    <div id="test"></div>
+    <div class="container">
+      <button id="reset">Reset Game</button>
+      <button id="openModal">Settings</button>
+      Zoom: <output>50</output><input type="range" id="zoom" name="points" min="1" max="100" step="1" oninput="this.previousElementSibling.value = this.value" value="50">
+    </div>
+
+    <div id="settingsModal" class="modal">
+      <div class="modal-content settings">
+        <span class="modal-close big-x">&times;</span>
+        <h2>SETTINGS</h2>
+        <p>
+          <div>
+            Clicking "save" with new settings will start a new game. Put a 0 in any number box or leave it blank to keep it unchanged.
+          </div>
+          <br>
+          <div>
+            <span>Take-Backsies Mode</span>
+            <input class="settings-input" type="checkbox" id="setTakeBack" title="Check to enable taking back turns">
+          </div>
+          <br>
+          <div>
+            <span>Random Order Mode:</span>
+            <input class="settings-input" type="checkbox" id="setRandomOrder" title="Check to enable random order of players. They will be in the order you enter them if it is unchecked.">
+          </div>
+          <br><hr><br>
+          <span>Preset: </span>
+          <select class="settings-input" name="preset" id="setPreset">
+            
+            <option value="classic">Classic</option>
+            <option value="mega">Mega</option>
+            <option value="custom">Custom</option>
+          </select>
+          <br><br>
+          <div>
+            <span>Rows:</span>
+            <input class="settings-input" type="number" id="setRows" min="0" title="input the number of rows"></input>
+          </div>
+          <br>
+          <div>
+            <span>Columns:</span>
+            <input class="settings-input" type="number" id="setCols" min="0" title="input number of columns">
+          </div>
+          <br>
+          <div>
+            <span>In a Row:</span>
+            <input class="settings-input" type="number" id="setWinCnd" min="0" title="input number of squares in a row to win">
+          </div>
+          <br>
+          <div>
+            <span>Players:</span>
+            <input class="settings-input" type="number" id="setPlrs" min="0" title="input number of players">
+          </div>
+          <div id="playerCustomization"></div>
+          <br><br><br>
+          <div class="modal-bottom-row">
+            <button id="saveSettings" onclick="saveSettings()">Save</button>
+            <button class="modal-close">Cancel</button>
+          </div>
+        </p>
+      </div>
+    </div>
+
+    <div id="winnerModal" class="modal">
+      <div class="modal-content">
+        <div id="winnerContent"></div>
+        <div class="modal-bottom-row">
+          <button id="playAgain" class="modal-close" onclick="reset()">Play Again</button>
+          <button id="admire" class="modal-close" onclick="admireMode = true">Admire</button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+        
+        <div class="game"></div>
+
+    </div>
+    <script src="tictactoe.js"></script>
+  </body>
+</html>

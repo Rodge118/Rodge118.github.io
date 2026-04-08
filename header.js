@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+//This goes at the top of all pages
+document.getElementById("header").innerHTML = `<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -13,11 +14,10 @@
     <a href="about.html"><button>About</button></a>
     <!--<a href="test.html"><button>Testing page</button></a>-->
     <a href="tictactoe.html"><button>Tic Tac Toe</button></a>
-  </nav>
+  </nav>`;
 
-  <body>
-    <h1>Welcome to My Site!</h1>
-    <p>Right now, it's not much to look at. But you can go to the 'tic tac toe' page for a fun customizeable tic tac toe game to play with friends!
-    </p>
-  </body>
-</html>
+  
+/* Insert at the top of every page:
+<div id="header"></div>
+<script src="header.js"></script>
+*/
