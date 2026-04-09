@@ -60,12 +60,7 @@ document.getElementById('setPreset').addEventListener('input', updatePresets);
 allSettingsInputs.forEach(element => {
     if (element != document.getElementById('setPreset')) {
         element.addEventListener('input', () => {
-            let newRows = document.getElementById("setRows").value;
-            let newCols = document.getElementById("setCols").value;
-            let newWinCnd = document.getElementById("setWinCnd").value;
-            let newPlrNumber = document.getElementById("setPlrs").value;
-
-            if (!((newRows == 3 && newCols == 3 && newWinCnd == 3 && newPlrNumber == 2) || (newRows == 9 && newCols == 9 && newWinCnd == 4 && newPlrNumber == 4))) {
+            if (!(checkSettingsAre(3, 3, 3, 2) || checkSettingsAre(9, 9, 4, 4) || checkSettingsAre(6, 7, 4, 2) || checkSettingsAre(5, 5, 3, 2))) {
                 document.getElementById('setPreset').value = "custom";
                 areSettingsCustom = true;
             }
@@ -155,6 +150,7 @@ function checkWin(player) {
     // check for horizontal wins
     let isWin = false;
     let inARow = 0;
+    let filledBoxes = 0; // to check for ties
     //console.log(winCnd);
     for (let i = 0; i < rows; i++) {
         inARow = 0;
@@ -168,6 +164,10 @@ function checkWin(player) {
                 //console.log("Not in a row. inARow = " + inARow);
                 inARow = 0;
             }
+
+            if (getCharFromBox(i, j) != "") { // check for ties with the first one
+                filledBoxes++; 
+            }
             
             isWin = (inARow == winCnd);
             if (isWin) {
@@ -178,6 +178,12 @@ function checkWin(player) {
             console.log(`player ${player} won horizontally`)
             break;
         }
+    }
+
+    if (filledBoxes == rows * cols) { // tie
+        console.log("It's a tie");
+        document.getElementById("winnerContent").innerHTML = `<h2>TIE! (${Math.ceil((rows * cols) / players.length)} moves)`;
+        winnerModal.style.display = "block";
     }
 
     // Check for vertical wins
@@ -318,7 +324,7 @@ function nextPlayer(backwards = false) {
 
 function saveSettings() {
     if (checkInvalidSettings()) {
-        resetSettings();
+        openSettings();
         return;
     }
 
@@ -343,7 +349,7 @@ function saveSettings() {
     //let settingsAreCurrent = newRows == rows && newCols == cols && newWinCnd == winCnd && newPlrNumber == players.length;
 
     if ((isCurrentGame && !admireMode) && !confirm("Are you sure? There is a game going on right now. Updating settings will restart it.")) {
-        resetSettings();
+        openSettings();
         return;
     }
 
@@ -423,6 +429,10 @@ function checkInvalidSettings() {
         alert("Invalid: The win condition can't be longer than the shorter dimension (rows or columns).");
         return true;
     }
+    if (newWinCnd != 0 && newWinCnd < 3) {
+        alert("Invalid: The minimum win condition is 3.");
+        return true;
+    }
     if (newPlrNumber != 0 && newPlrNumber < 2) {
         alert("Invalid: There must be at least 2 players (no singleplayer or online multiplayer... yet :) )");
         return true;
@@ -458,6 +468,12 @@ function updatePresets() {
     } else if (preset == "mega") {
         setSettingsFields(9, 9, 4, 4);
         areSettingsCustom = false;
+    } else if (preset == "connect4") {
+        setSettingsFields(6, 7, 4, 2);
+        areSettingsCustom = false;
+    } else if (preset == "fbf") {
+        setSettingsFields(5, 5, 3, 2);
+        areSettingsCustom = false;
     }
     
     if (areSettingsCustom) {
@@ -465,6 +481,16 @@ function updatePresets() {
     }
 
     document.getElementById("setPlrs").dispatchEvent(new Event('input'));
+}
+
+function checkSettingsAre(rows, cols, winCnd, plrNum) {
+    if (document.getElementById("setRows").value == rows && document.getElementById("setCols").value == cols && document.getElementById("setWinCnd").value == winCnd && document.getElementById("setPlrs").value == plrNum) {
+        console.log("Is ", rows, cols, winCnd, plrNum, ": true");
+        return true;
+    } else {
+        console.log("Is ", rows, cols, winCnd, plrNum, ": false");
+        return false;
+    }
 }
 
 function openSettings() {
